@@ -1,0 +1,39 @@
+{
+  "id": "06-pipeline-slice",
+  "title": "Pipeline — taglio «at risk», nessuna fuga di scope",
+  "failure_mode": "Fuga di scope. A una richiesta ristretta il modello tende a rispondere con tutto quello che sa, perche' il contesto ce l'ha davanti. Chi chiede «cosa e' a rischio» riceve l'intera pipeline e deve rifare a mano il filtro che aveva delegato: la risposta e' formalmente corretta e praticamente inutile. Si verifica il contrario del solito — non cosa c'e', ma cosa NON deve esserci.",
+  "prompt": "pipeline at risk",
+  "skills": [
+    "pipeline-summary"
+  ],
+  "expect": "sections",
+  "today": "2026-09-10",
+  "vault_from": "05-pipeline-arithmetic",
+  "checks": {
+    "sections": {
+      "max_words": 700
+    },
+    "oracle": {
+      "must_cite": [
+        "at_risk_eur",
+        "n_at_risk"
+      ],
+      "must_list_ids": [
+        "at_risk_ids"
+      ],
+      "must_not_list_ids": [
+        "commit_ids"
+      ]
+    },
+    "judgment": [
+      {
+        "id": "resta-nel-taglio",
+        "question": "L'output riguarda i soli deal a rischio, invece di presentare il quadro completo della pipeline? Rispondi false se include forecast, copertura e breakdown generali che non erano stati chiesti."
+      },
+      {
+        "id": "una-azione-per-deal",
+        "question": "Per ciascun deal a rischio l'output indica una prossima azione concreta? Rispondi false se descrive il rischio senza dire cosa fare."
+      }
+    ]
+  }
+}

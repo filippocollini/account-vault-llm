@@ -1,0 +1,97 @@
+filters:
+  and:
+    - file.inFolder("wiki/pipeline/")
+    - 'type == "opportunity"'
+formulas:
+  amount_fmt: if(amount_eur, "€" + string(amount_eur), "—")
+  weighted_fmt: if(weighted_eur, "€" + string(weighted_eur), "—")
+  slipped: if(expected_close && expected_close < now(), "⚠ slipped", "")
+properties:
+  formula.amount_fmt:
+    displayName: Value
+  formula.weighted_fmt:
+    displayName: Weighted
+  formula.slipped:
+    displayName: Slip
+  stage:
+    displayName: Stage
+  forecast_cat:
+    displayName: Forecast
+  account:
+    displayName: Account
+  expected_close:
+    displayName: Close
+  risk_flag:
+    displayName: Risk
+  owner:
+    displayName: Owner
+  channel_type:
+    displayName: Channel
+views:
+  - type: table
+    name: By stage
+    filter: 'status == "open"'
+    groupBy:
+      property: stage
+      direction: DESC
+    order:
+      - deal_id
+      - account
+      - opportunity
+      - formula.amount_fmt
+      - formula.weighted_fmt
+      - forecast_cat
+      - expected_close
+      - risk_flag
+  - type: table
+    name: By forecast category
+    filter: 'status == "open"'
+    groupBy:
+      property: forecast_cat
+      direction: ASC
+    order:
+      - deal_id
+      - account
+      - stage
+      - formula.amount_fmt
+      - formula.weighted_fmt
+      - expected_close
+  - type: table
+    name: By account
+    filter: 'status == "open"'
+    groupBy:
+      property: account
+      direction: ASC
+    order:
+      - deal_id
+      - opportunity
+      - stage
+      - formula.amount_fmt
+      - forecast_cat
+      - risk_flag
+  - type: table
+    name: At risk
+    filter: 'risk_flag == "AT RISK" && status == "open"'
+    order:
+      - deal_id
+      - account
+      - stage
+      - formula.amount_fmt
+      - expected_close
+      - formula.slipped
+  - type: table
+    name: Closed / Won
+    filter: 'status == "won"'
+    order:
+      - deal_id
+      - account
+      - formula.amount_fmt
+      - expected_close
+  - type: cards
+    name: Cards
+    filter: 'status == "open"'
+    order:
+      - account
+      - stage
+      - formula.amount_fmt
+      - forecast_cat

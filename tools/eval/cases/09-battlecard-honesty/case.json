@@ -1,0 +1,64 @@
+{
+  "id": "09-battlecard-honesty",
+  "title": "Battlecard — l'onesta' su quando perdiamo",
+  "failure_mode": "Due fallimenti che vanno insieme. Il primo: la sezione «quando perdiamo» scritta in modo difensivo — perdiamo solo se il cliente sbaglia — che e' il modo in cui una battlecard diventa inutile, perche' chi la porta in trattativa scopre davanti al cliente che non la copre. Il secondo: promettere funzioni non ancora disponibili. Una battlecard non e' un documento interno innocuo: le sue frasi finiscono dette a voce a un cliente.",
+  "prompt": "BATTLECARD Halberd",
+  "skills": [
+    "battlecard"
+  ],
+  "expect": "sections",
+  "checks": {
+    "sections": {
+      "required": [
+        "Chi",
+        "perdiamo",
+        "vinciamo",
+        "proof point",
+        "trappola",
+        "osizionamento"
+      ],
+      "max_words": 800
+    },
+    "grounding": {
+      "must_cite": [
+        "Halberd"
+      ],
+      "must_absent": [
+        "Quorra",
+        "Sablewave",
+        "Ferrocore"
+      ],
+      "must_qualify": [
+        {
+          "term": "Quillgate Mesh",
+          "within": 160,
+          "qualifier": [
+            "in development",
+            "in sviluppo",
+            "non disponibile",
+            "roadmap",
+            "non ancora"
+          ]
+        }
+      ]
+    },
+    "judgment": [
+      {
+        "id": "quando-perdiamo-e-sostanziale",
+        "question": "La sezione «quando perdiamo» descrive scenari reali in cui il concorrente e' oggettivamente la scelta migliore per il cliente? Rispondi false se e' scritta in modo difensivo, cioe' se ogni perdita e' attribuita a un errore o a un pregiudizio del cliente."
+      },
+      {
+        "id": "proof-point-verificabili",
+        "question": "I proof point sono affermazioni che qualcuno potrebbe verificare — una capacita' precisa, uno schema di referenza, un aggancio normativo — invece di aggettivi promozionali? Rispondi false se sono generici come «piu' semplice» o «piu' sicuro»."
+      },
+      {
+        "id": "domanda-trappola-non-nomina",
+        "question": "La domanda-trappola fa emergere il limite del concorrente senza nominarlo? Rispondi false se nomina il concorrente o se e' una domanda generica di discovery."
+      },
+      {
+        "id": "niente-affermazioni-inventate",
+        "question": "L'output evita affermazioni specifiche sul concorrente che la fonte non contiene — prezzi, numeri di clienti, difetti tecnici non documentati? Rispondi false se afferma dettagli non presenti nella pagina di intel."
+      }
+    ]
+  }
+}

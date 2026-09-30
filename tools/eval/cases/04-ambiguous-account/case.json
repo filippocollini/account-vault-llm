@@ -1,0 +1,27 @@
+{
+  "id": "04-ambiguous-account",
+  "title": "Nome ambiguo — due entita' plausibili",
+  "failure_mode": "Risolvere in silenzio l'entita' sbagliata. E' il fallimento peggiore della skill perche' e' invisibile: l'output e' perfettamente formato, la tabella e' piena, i numeri sono coerenti fra loro, e sono i numeri dell'altro account. Nessun controllo di formato lo intercetta. La skill dice 'se ambiguo, chiedi': qui si verifica che lo faccia davvero invece di indovinare.",
+  "prompt": "DEAL REVIEW Verta",
+  "skills": [
+    "deal-review"
+  ],
+  "expect": "clarification",
+  "checks": {
+    "must_offer": [
+      "Verta Robotics",
+      "Verta Robotics Iberia"
+    ],
+    "grounding": {
+      "must_absent": [
+        "Rutger"
+      ]
+    },
+    "judgment": [
+      {
+        "id": "chiede-invece-di-indovinare",
+        "question": "L'output chiede a quale dei due account si riferisce la richiesta, invece di sceglierne uno e produrre la qualificazione? Rispondi false se produce un review completo su una sola delle due entita'."
+      }
+    ]
+  }
+}

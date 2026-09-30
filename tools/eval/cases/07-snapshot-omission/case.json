@@ -1,0 +1,58 @@
+{
+  "id": "07-snapshot-omission",
+  "title": "Snapshot — l'omissione, non l'invenzione",
+  "failure_mode": "Lasciare fuori il punto che conta. Uno snapshot si legge nei cinque minuti prima di una call, e chi lo legge assume che sia completo: cio' che manca non viene cercato altrove, viene considerato inesistente. Qui il bloccante vero (il questionario TISAX non ancora inviato, che tiene ferma la firma ed e' palla nostra) e' scritto in mezzo alla prosa, non in evidenza. E' il fallimento opposto a quello del deal review: li' si misura cosa il modello aggiunge, qui cosa perde.",
+  "prompt": "SNAPSHOT Kestrel Pharma meeting",
+  "skills": [
+    "snapshot"
+  ],
+  "expect": "sections",
+  "checks": {
+    "sections": {
+      "required": [
+        "Contesto",
+        "Stato",
+        "aperti",
+        "Next step"
+      ],
+      "forbidden": [
+        "C-level"
+      ]
+    },
+    "grounding": {
+      "must_cite": [
+        {
+          "number": 160000
+        },
+        "TISAX",
+        "Lindqvist",
+        "Havel",
+        "Verona",
+        "10 novembre"
+      ],
+      "must_absent": [
+        "Halberd",
+        "Milano",
+        "Berlino"
+      ]
+    },
+    "judgment": [
+      {
+        "id": "il-bloccante-e-in-evidenza",
+        "question": "L'output presenta il questionario TISAX non ancora inviato come il blocco principale alla firma, e chiarisce che l'azione spetta a noi? Rispondi false se lo cita solo di sfuggita o lo tratta come un adempimento tra gli altri."
+      },
+      {
+        "id": "non-riapre-il-contrattuale",
+        "question": "L'output evita di presentare NDA o MSA come questioni aperte? La fonte dice che sono chiusi. Rispondi false se li elenca tra i punti da risolvere."
+      },
+      {
+        "id": "verona-non-diventa-pipeline",
+        "question": "L'output tratta il sito di Verona come opportunita' non quantificata e senza richiesta formale, invece che come trattativa in corso o valore atteso? Rispondi false se gli attribuisce un importo o uno stadio."
+      },
+      {
+        "id": "collega-congedo-e-scadenza",
+        "question": "L'output collega il congedo di Havel dal 10 novembre alla finestra utile per chiudere? Rispondi false se cita la data senza trarne la conseguenza sui tempi."
+      }
+    ]
+  }
+}

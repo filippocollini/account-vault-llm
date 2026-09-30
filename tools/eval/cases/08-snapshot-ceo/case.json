@@ -1,0 +1,37 @@
+{
+  "id": "08-snapshot-ceo",
+  "title": "Snapshot — lo scope CEO cambia davvero qualcosa?",
+  "failure_mode": "Cambiare etichetta senza cambiare altitudine. Chiesto un taglio executive, il modello tende a produrre lo stesso contenuto operativo con un titolo in piu' in fondo. Il CEO riceve dettagli che non gli servono e non riceve la sola cosa che gli serve: il rischio, l'opportunita', la richiesta. Stesso fixture del caso 07, prompt diverso: si misura se lo scope e' un parametro reale o decorativo.",
+  "prompt": "SNAPSHOT Kestrel Pharma CEO",
+  "skills": [
+    "snapshot"
+  ],
+  "expect": "sections",
+  "vault_from": "07-snapshot-omission",
+  "checks": {
+    "sections": {
+      "required": [
+        "C-level"
+      ],
+      "max_words": 600
+    },
+    "grounding": {
+      "must_cite": [
+        {
+          "number": 160000
+        },
+        "TISAX"
+      ]
+    },
+    "judgment": [
+      {
+        "id": "blocco-c-level-ha-i-tre-elementi",
+        "question": "Il blocco C-level contiene tutti e tre gli elementi previsti — il rischio principale, l'opportunita' principale e una richiesta esplicita? Rispondi false se ne manca uno."
+      },
+      {
+        "id": "altitudine-diversa",
+        "question": "Il blocco C-level e' scritto a un livello piu' alto del resto, cioe' parla di esito e decisione invece che di passaggi operativi? Rispondi false se ripete gli stessi dettagli dei blocchi precedenti con altre parole."
+      }
+    ]
+  }
+}

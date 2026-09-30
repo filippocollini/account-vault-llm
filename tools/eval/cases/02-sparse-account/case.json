@@ -1,0 +1,54 @@
+{
+  "id": "02-sparse-account",
+  "title": "Account quasi vuoto, una sola call",
+  "failure_mode": "Inventare. Con sei dimensioni su otto senza dati, il modello ha davanti una tabella da riempire e nessuna fonte: e' la condizione in cui produce plausibilita' invece di fatti. Qui l'output corretto e' in gran parte vuoto, e va verificato che resti vuoto.",
+  "prompt": "DEAL REVIEW Halden Energie",
+  "skills": [
+    "deal-review"
+  ],
+  "expect": "review",
+  "checks": {
+    "structure": {
+      "min_gaps": 2
+    },
+    "grounding": {
+      "must_cite": [
+        {
+          "number": 23000
+        },
+        "Discovery"
+      ],
+      "must_absent": [
+        "Siemens",
+        "ABB",
+        "Halberd",
+        "CFO",
+        "comitato"
+      ],
+      "must_flag_unknown": [
+        "economic_buyer",
+        "champion",
+        "decision_process",
+        "paper_process",
+        "competition",
+        "metrics"
+      ],
+      "must_be_filled": [
+        "identify_pain"
+      ],
+      "must_mark_inferred": [
+        "decision_criteria"
+      ]
+    },
+    "judgment": [
+      {
+        "id": "non-costruisce-un-processo-decisionale",
+        "question": "L'output evita di descrivere un processo decisionale, un budget o un comitato di acquisto che la fonte non menziona? Rispondi false se attribuisce al cliente passaggi o ruoli non documentati."
+      },
+      {
+        "id": "azione-proporzionata",
+        "question": "Le azioni proposte sono proporzionate a un deal da 23.000 euro in fase iniziale (tipicamente: fissare una seconda call, capire chi ha budget)? Rispondi false se propone un piano pesante da grande account."
+      }
+    ]
+  }
+}

@@ -1,0 +1,35 @@
+#!/bin/sh
+# Pre-commit gate sul lint del vault.
+#
+# Non è un muro, è un ratchet: blocca il commit solo se il numero di ERROR
+# *aumenta* rispetto alla soglia in tools/lint/error-baseline.txt. Il debito
+# esistente non ti impedisce di lavorare; introdurne di nuovo sì.
+# Quando chiudi dei finding, abbassa la soglia — è il progresso, versionato.
+#
+# Installazione:
+#   cp tools/githooks/pre-commit .git/hooks/pre-commit && chmod +x .git/hooks/pre-commit
+# Bypass una volta:
+#   git commit --no-verify
+
+ROOT="$(git rev-parse --show-toplevel 2>/dev/null)" || exit 0
+[ -f "$ROOT/tools/lint/vault.py" ] || exit 0
+if [ -z "$VAULT_TODAY" ] && [ -f "$ROOT/.vault-today" ]; then
+    VAULT_TODAY="$(head -1 "$ROOT/.vault-today")"; export VAULT_TODAY
+fi
+
+BASELINE_FILE="$ROOT/tools/lint/error-baseline.txt"
+MAX="$(sed -n 's/^[^0-9]*\([0-9][0-9]*\).*/\1/p' "$BASELINE_FILE" 2>/dev/null | head -1)"
+[ -n "$MAX" ] || MAX=0
+
+# --no-report di proposito: rigenerare il report durante il commit lascerebbe
+# una modifica non in stage.
+python3 "$ROOT/tools/lint/vault.py" --root "$ROOT" --no-report --max-errors "$MAX" || {
+    cat <<'MSG'
+
+Commit bloccato: il lint del vault ha più ERROR della soglia.
+  Dettaglio:  python3 tools/lint/vault.py     (scrive wiki/meta/lint-report.md)
+  Bypass:     git commit --no-verify
+MSG
+    exit 1
+}
+exit 0

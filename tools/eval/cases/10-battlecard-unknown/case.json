@@ -1,0 +1,32 @@
+{
+  "id": "10-battlecard-unknown",
+  "title": "Battlecard — concorrente fuori elenco, sicurezza non dovuta",
+  "failure_mode": "Sicurezza non dovuta. Su un concorrente che non e' nell'elenco supportato e su cui il vault non ha nulla, il modello produce comunque una scheda completa e sicura di se': la forma e' identica a quella di una scheda fondata, quindi nulla avvisa chi la legge che sta guardando congetture. La skill prescrive di produrla comunque ma di dichiararla best-effort. Si misura se la dichiarazione c'e' e se il tono cala di conseguenza. (Nota dopo la prima misura: «non nominare Halberd» era un'asserzione sbagliata. Il modello lo nomina citando l'elenco dei concorrenti coperti dalla skill e il contenuto del fixture, che e' esattamente la trasparenza richiesta. Il rischio reale e' attribuire caratteristiche a Corvane, e resta coperto dal giudizio.)",
+  "prompt": "BATTLECARD Corvane Secure",
+  "skills": [
+    "battlecard"
+  ],
+  "expect": "sections",
+  "vault_from": "09-battlecard-honesty",
+  "checks": {
+    "sections": {
+      "max_words": 700
+    },
+    "grounding": {
+      "must_match": [
+        "(best[ -]?effort|non (e' )?(nell')?elenco|non supportat|intel (limitat|assent|non disponibil)|nessun dato|informazioni limitate|non documentat)"
+      ],
+      "must_absent": []
+    },
+    "judgment": [
+      {
+        "id": "dichiara-il-limite",
+        "question": "L'output avverte in modo visibile che il concorrente non e' tra quelli coperti e che la scheda si basa su informazioni limitate? Rispondi false se l'avvertenza manca o e' relegata a un inciso finale facile da saltare."
+      },
+      {
+        "id": "non-inventa-il-concorrente",
+        "question": "L'output evita di attribuire al concorrente prodotti, clienti, prezzi o caratteristiche tecniche specifiche che nessuna fonte fornisce? Rispondi false se descrive la loro offerta come se la conoscesse."
+      }
+    ]
+  }
+}

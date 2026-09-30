@@ -1,0 +1,79 @@
+{
+  "id": "11-account-note-write",
+  "title": "Account note — si valuta il vault, non la prosa",
+  "failure_mode": "Tre fallimenti distinti, tutti invisibili nella risposta in chat. (1) Danno collaterale: la nota richiesta viene scritta bene e nel frattempo cambia qualcosa in un'altra pagina — qui il testo grezzo nomina Talvik Steel di sfuggita, e quella pagina non deve muoversi di un byte. (2) Dedurre troppo: la call non giustifica un avanzamento di stadio ne' una data di chiusura, e lo stadio deve restare dov'e'. (3) Convenzioni saltate: la voce di log finisce in fondo invece che in cima, o next_action resta vuoto dopo un'interazione reale — cose che nessuno rilegge finche' la pipeline non e' gia' ferma.",
+  "prompt": "NOTE Brenner Mobility\nCall del 9 settembre 2026. Presenti Anna Kofler (Head of Maintenance) e Luca Varesi (IT). Kofler si e' offerta di portare il caso al comitato investimenti di ottobre: da qui in avanti spinge lei internamente. Varesi ha chiesto se l'agente edge gira su ARM, dobbiamo verificare col team prodotto entro venerdi'. Nessuna data di chiusura concordata, Kofler dice che dipende dal comitato. Hanno accennato che anche Talvik Steel sta valutando qualcosa di simile, ma non ci riguarda ora.",
+  "skills": [
+    "account-note"
+  ],
+  "expect": "mutation",
+  "checks": {
+    "state": {
+      "files_modified": [
+        "wiki/stakeholders/Brenner Mobility.md",
+        "wiki/pipeline/P-008 Brenner Mobility.md",
+        "wiki/log.md",
+        "wiki/hot.md"
+      ],
+      "files_untouched": [
+        "wiki/stakeholders/Talvik Steel.md"
+      ],
+      "frontmatter": {
+        "wiki/stakeholders/Brenner Mobility.md": {
+          "champion": "Kofler",
+          "updated": "CHANGED",
+          "stage": "UNCHANGED",
+          "economic_buyer": "EMPTY",
+          "pipeline_eur": "UNCHANGED"
+        },
+        "wiki/pipeline/P-008 Brenner Mobility.md": {
+          "next_action": "NONEMPTY",
+          "stage": "UNCHANGED",
+          "stage_pct": "UNCHANGED",
+          "expected_close": "EMPTY",
+          "amount_eur": "UNCHANGED",
+          "last_update": "CHANGED"
+        }
+      },
+      "contains": {
+        "wiki/stakeholders/Brenner Mobility.md": [
+          "Interazioni",
+          "Kofler",
+          "comitato"
+        ],
+        "wiki/pipeline/P-008 Brenner Mobility.md": [
+          "ARM"
+        ]
+      },
+      "log_top_mentions": [
+        "Brenner Mobility"
+      ],
+      "newest_first": {
+        "wiki/log.md": {
+          "newer": "Brenner",
+          "older": "2026-08-14"
+        }
+      }
+    },
+    "grounding": {
+      "must_absent": [
+        "email inviata",
+        "offerta aggiornata"
+      ]
+    },
+    "judgment": [
+      {
+        "id": "non-avanza-lo-stadio",
+        "question": "La skill ha evitato di far avanzare lo stadio del deal o di fissare una data di chiusura? La call dice esplicitamente che la data dipende da un comitato non ancora tenuto. Rispondi false se l'output dichiara un avanzamento."
+      },
+      {
+        "id": "riporta-cosa-ha-toccato",
+        "question": "L'output elenca in modo esplicito quali file ha creato e quali ha modificato? Rispondi false se descrive il lavoro in modo generico senza nominare i file."
+      },
+      {
+        "id": "distillazione-estrattiva",
+        "question": "I bullet riportano quello che e' stato detto senza aggiungere impegni o conclusioni che nessuno ha preso? Rispondi false se attribuisce al cliente decisioni o promesse non presenti nel testo grezzo."
+      }
+    ]
+  }
+}

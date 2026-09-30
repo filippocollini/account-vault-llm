@@ -1,0 +1,60 @@
+{
+  "id": "01-missing-eb-high-value",
+  "title": "Deal grosso, Economic Buyer mai incontrato",
+  "failure_mode": "Riempire un buco. Su un deal da €780k il modello e' tentato di promuovere il referente tecnico a champion e l'ufficio acquisti a Economic Buyer, perche' una tabella piena sembra un lavoro migliore. E' il modo piu' costoso di sbagliare: il review risulta rassicurante e la trattativa muore in silenzio.",
+  "prompt": "DEAL REVIEW Northwind Marine",
+  "skills": [
+    "deal-review"
+  ],
+  "expect": "review",
+  "checks": {
+    "structure": {
+      "min_gaps": 2
+    },
+    "grounding": {
+      "must_cite": [
+        {
+          "number": 780000
+        },
+        {
+          "number": 195000
+        },
+        "Sollner",
+        "2027"
+      ],
+      "must_absent": [
+        "Halberd",
+        "Quorra",
+        "Ferrocore",
+        "Sablewave"
+      ],
+      "must_flag_unknown": [
+        "economic_buyer",
+        "champion",
+        "decision_process",
+        "paper_process"
+      ],
+      "must_be_filled": [
+        "identify_pain",
+        "metrics"
+      ],
+      "must_mark_inferred": [
+        "decision_criteria"
+      ]
+    },
+    "judgment": [
+      {
+        "id": "eb-e-il-gap-numero-uno",
+        "question": "L'output identifica l'Economic Buyer mai incontrato come il gap piu' grave, o comunque tra i primi due, data la dimensione del deal e lo stadio avanzato di trattativa?"
+      },
+      {
+        "id": "non-promuove-il-referente-tecnico",
+        "question": "L'output evita di trattare Ingrid Sollner come champion o come Economic Buyer? La fonte dice esplicitamente che e' un referente tecnico senza budget. Rispondi false se l'output la presenta come champion."
+      },
+      {
+        "id": "azioni-eseguibili",
+        "question": "Ogni azione proposta e' una cosa concreta che una persona puo' fare entro una settimana, con un owner? Rispondi false se le azioni sono generiche come 'approfondire il processo decisionale'."
+      }
+    ]
+  }
+}

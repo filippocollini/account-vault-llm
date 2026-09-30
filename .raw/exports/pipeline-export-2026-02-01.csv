@@ -1,0 +1,7 @@
+deal_id,account,opportunity,stage,amount_eur,expected_close,owner
+P-001,Northwind Marine,Remote access refresh 4 siti,L4,780000,2026-09-30,Alex
+P-002,Verta Robotics,Assistenza remota parco macchine,L3,410000,2026-09-30,Alex
+P-005,Orbit Logistics,Connettività hub smistamento,L3,90000,2026-08-15,Sam Ortega
+P-006,Talvik Steel,Segmentazione impianto Lulea,L2,250000,2026-10-31,Alex
+P-009,Ferro Group,Rollout secure remote access,L5,300000,2026-06-30,Alex
+P-011,Orbit Logistics,Pilota magazzino Bilbao,L3,18000,2026-04-30,Sam Ortega

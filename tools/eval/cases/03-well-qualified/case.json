@@ -1,0 +1,54 @@
+{
+  "id": "03-well-qualified",
+  "title": "Controllo negativo — deal sano, 8 dimensioni su 8",
+  "failure_mode": "Inventare problemi. A una skill che si chiama 'trova i gap' un deal senza gap sembra un fallimento, e il modello tende a produrre preoccupazioni per giustificarsi. E' il falso positivo: costa credibilita' alla skill e fa perdere tempo su rischi inesistenti. Quasi nessuna suite di eval include un caso in cui la risposta giusta e' 'va tutto bene', ed e' il motivo per cui molti sistemi sembrano funzionare finche' non li si guarda.",
+  "prompt": "DEAL REVIEW Verta Robotics",
+  "skills": [
+    "deal-review"
+  ],
+  "expect": "review",
+  "checks": {
+    "structure": {
+      "max_gaps": 1
+    },
+    "grounding": {
+      "must_cite": [
+        {
+          "number": 410000
+        },
+        {
+          "number": 234600
+        },
+        "Reuter",
+        "Muraro",
+        "Rutger"
+      ],
+      "must_absent": [
+        "Halberd",
+        "Quorra",
+        "Sablewave",
+        "Ferrocore"
+      ],
+      "must_be_filled": [
+        "metrics",
+        "economic_buyer",
+        "decision_criteria",
+        "decision_process",
+        "paper_process",
+        "identify_pain",
+        "champion",
+        "competition"
+      ]
+    },
+    "judgment": [
+      {
+        "id": "non-fabbrica-gap",
+        "question": "L'output riconosce che il deal e' ben qualificato, invece di costruire preoccupazioni per avere qualcosa da dire? Rispondi false se presenta come gap critici dimensioni che nella fonte risultano coperte e documentate."
+      },
+      {
+        "id": "lunghezza-proporzionata",
+        "question": "L'output e' conciso, come si addice a un deal senza problemi aperti? Rispondi false se dilunga l'analisi oltre quanto il contenuto giustifica."
+      }
+    ]
+  }
+}

@@ -1,0 +1,63 @@
+{
+  "id": "05-pipeline-arithmetic",
+  "title": "Pipeline — l'aritmetica, verificata contro un oracolo",
+  "failure_mode": "Sbagliare un numero in modo invisibile. Il readout della pipeline finisce davanti al CEO e nessuno rifa' i conti a mano: un totale sbagliato del 12% ha esattamente lo stesso aspetto di uno giusto. Qui l'atteso non e' scritto a mano ma ricalcolato da oracle.py sul frontmatter dei deal, quindi l'asserzione resta vera anche se il fixture cambia.",
+  "prompt": "PIPELINE SUMMARY",
+  "skills": [
+    "pipeline-summary"
+  ],
+  "expect": "sections",
+  "today": "2026-09-10",
+  "checks": {
+    "sections": {
+      "required": [
+        "Forecast",
+        "overage",
+        "risk",
+        "Breakdown"
+      ]
+    },
+    "grounding": {
+      "must_absent": [
+        "Halberd",
+        "Quorra"
+      ]
+    },
+    "oracle": {
+      "must_cite": [
+        "open_eur",
+        "weighted_open_eur",
+        "commit_eur",
+        "best_case_eur",
+        "coverage_in_quarter",
+        "n_slipped",
+        "slipped_eur",
+        "at_risk_eur",
+        "quota_quarter"
+      ],
+      "must_list_ids": [
+        "at_risk_ids",
+        "slipped_ids"
+      ],
+      "must_not_cite_numbers": [
+        2500000,
+        4500000
+      ],
+      "must_flag_inconsistencies": true
+    },
+    "judgment": [
+      {
+        "id": "narrativa-risponde-alla-domanda",
+        "question": "L'output contiene una riga in linguaggio piano che dice se il numero del trimestre si fa o no, e qual e' la leva principale? Rispondi false se si limita a elencare tabelle senza concludere."
+      },
+      {
+        "id": "distingue-commit-da-speranza",
+        "question": "L'output tiene distinti il Commit (il pavimento) dal Best Case (il target), invece di presentare un unico numero ottimistico? Rispondi false se confonde le due categorie."
+      },
+      {
+        "id": "dichiara-i-dati-sporchi",
+        "question": "L'output segnala esplicitamente che alcuni deal hanno una categoria di forecast non coerente con lo stadio e il punteggio MEDDPICC, o una data di chiusura mancante, invece di produrre un totale pulito che nasconde il problema? Rispondi false se i numeri sono presentati come affidabili senza riserve."
+      }
+    ]
+  }
+}
